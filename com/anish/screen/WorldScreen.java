@@ -139,6 +139,9 @@ public class WorldScreen implements Screen {
             case 40:
             A.direction = 4;
                 if(judge(posx,posy+1)){
+                    if(world.get(posx,posy+1).getGlyph()==(char)250){
+                        A.hp--;
+                    }
                     world.put(A,posx,posy+1);
                     world.put(new Floor(world), posx, posy);
                     posy++;
@@ -147,6 +150,9 @@ public class WorldScreen implements Screen {
             case 38:
             A.direction = 2;
             if(judge(posx,posy-1)){
+                if(world.get(posx,posy-1).getGlyph()==(char)250){
+                    A.hp--;
+                }
                 world.put(A,posx,posy-1);
                 world.put(new Floor(world), posx, posy);
                 posy--;
@@ -155,6 +161,9 @@ public class WorldScreen implements Screen {
             case 39:
             A.direction = 3;
             if(judge(posx+1,posy)){
+                if(world.get(posx+1,posy).getGlyph()==(char)250){
+                    A.hp--;
+                }
                 world.put(A,posx+1,posy);
                 world.put(new Floor(world), posx, posy);
                 posx++;
@@ -163,6 +172,9 @@ public class WorldScreen implements Screen {
             case 37:
             A.direction = 1;
             if(judge(posx-1,posy)){
+                if(world.get(posx-1,posy).getGlyph()==(char)250){
+                    A.hp--;
+                }
                 world.put(A,posx-1,posy);
                 world.put(new Floor(world), posx, posy);
                 posx--;
@@ -196,9 +208,13 @@ public class WorldScreen implements Screen {
             }
             if(tarx != -1 && tary != -1){
                 System.out.println("successfully attack");
-                Thread t = new Thread (new Bullet(world, A.direction,tarx,tary));
-                t.start();
-
+                if(world.get(tarx,tary).getGlyph() == (char)1){
+                   world.get(tarx,tary).hp--;
+                }
+                else{
+                    Thread t = new Thread (new Bullet(world, A.direction,tarx,tary));
+                    t.start();
+                }
             }
             break;
         }

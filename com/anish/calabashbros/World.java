@@ -80,15 +80,19 @@ public class World {
                                     if(tiles[i][j].getThing().getGlyph()==(char)177){
                                         put(setFloor(),i, j);
                                     }
-                                    else{
+                                    else if(tiles[i][j].getThing().is_dead == 0){
 
                                         tiles[i][j].getThing().is_dead = 1;
                                         if(tiles[i][j].getThing().getGlyph() == (char)1){
                                             score++;
+                                            put(setFloor(),i, j);
                                         }
                                         else if(tiles[i][j].getThing().getGlyph() == (char)2){
                                             if_win = -1;
                                         }
+                                        put(setFloor(),i, j);
+                                    }
+                                    else{
                                         put(setFloor(),i, j);
                                     }
                                 }
